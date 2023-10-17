@@ -5,6 +5,8 @@ FSM mae;
 
 void setup() {
   size(1200, 800);
+  background(255);
+  smooth();
   surface.setTitle("Ecran");
   try {
       bus = new Ivy("Tableau", "Tableau est pret", null);
@@ -12,4 +14,15 @@ void setup() {
     }
     catch (IvyException ie) {}
       mae = FSM.INITIAL;
+}
+
+void draw() {
+    
+}
+
+void mouseClicked() {
+   try {
+      bus.sendMsg("Tableau x=" + mouseX + " y=" + mouseY);
+    }
+    catch (IvyException ie) {}
 }
