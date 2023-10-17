@@ -21,7 +21,7 @@ void setup() {
       bus.bindMsg("^OneDollarIvy Template=(.*) Confidence=(.*)",new IvyMessageListener() {
         public void receive(IvyClient client, String[] args) {
                     System.out.println("Message reçu: " + args[0] + " pour " + args[1]);
-                    listeRequete.receiveVocal(args[0],float(args[1]));
+                    listeRequete.receiveForme(args[0],float(args[1]));
                 }});
     }
     catch (IvyException ie) {}
