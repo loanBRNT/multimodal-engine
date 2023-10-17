@@ -11,9 +11,14 @@ void setup() {
   try {
       bus = new Ivy("Tableau", "Tableau est pret", null);
       bus.start("127.255.255.255:2010");
+      bus.bindMsg("^sra5 Text=(.*) Confidence=(.*)",new IvyMessageListener() {
+        public void receive(IvyClient client, String[] args) {
+                    System.out.println("Message reçu: " + args[0] + " pour " + args[1]);
+                }});
     }
     catch (IvyException ie) {}
       mae = FSM.INITIAL;
+      
 }
 
 void draw() {
@@ -21,8 +26,5 @@ void draw() {
 }
 
 void mouseClicked() {
-   try {
-      bus.sendMsg("Tableau x=" + mouseX + " y=" + mouseY);
-    }
-    catch (IvyException ie) {}
+
 }
