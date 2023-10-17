@@ -4,11 +4,19 @@ class Requete {
   RequeteVocal rv=null;
   
   boolean formeInRequete(){
-    return (rf == null);
+    return (rf != null);
   }
   
   boolean vocalInRequete(){
-    return rv==null;
+    return rv!=null;
+  }
+  
+  boolean clicInRequete(){
+    return rc!=null;
+  }
+  
+  void ajouterClic(RequeteClic r){
+     rc = r; 
   }
   
   void ajouterVocal(RequeteVocal r){
@@ -17,5 +25,9 @@ class Requete {
   
   void ajouterForme(RequeteForme r){
      rf = r; 
+  }
+  
+  boolean estPrete() {
+   return rc != null && rf != null && rv != null; 
   }
 }

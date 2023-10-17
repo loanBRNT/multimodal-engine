@@ -3,7 +3,7 @@ import fr.dgac.ivy.*;
 Ivy bus;
 FSM mae;
 
-ListeRequete listeRequete = new ListeRequete(10);
+ListeRequete listeRequete = new ListeRequete();
 
 void setup() {
   size(1200, 800);
@@ -30,9 +30,9 @@ void setup() {
 }
 
 void draw() {
-    
+    listeRequete.checkRequetePrete();
 }
 
 void mouseClicked() {
-
+  listeRequete.addClick(mouseX,mouseY);
 }
