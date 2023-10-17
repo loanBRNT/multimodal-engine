@@ -16,9 +16,6 @@ class RequeteVocal {
   String colour = "none";
   String pos = "none";
   String shape = "none";
- 
-  
-  
   
   RequeteVocal(String text, float conf){
     this.text = text;
@@ -114,10 +111,4 @@ class RequeteVocal {
       }
     }
   }
-  
-  
-  
-  
-  
-  public RequeteVocal(String s, float c){}
 }
