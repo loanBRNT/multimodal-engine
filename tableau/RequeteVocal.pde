@@ -1,7 +1,3 @@
-import ch.bildspur.ivy.Ivy;
-import ch.bildspur.ivy.IvyClient;
-import processing.core.PApplet;
-
 class RequeteVocal {
   
   
