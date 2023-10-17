@@ -1,19 +1,14 @@
 class ListeRequete {
   
-  int taille;
-  Requete[] listeRequete;
+  ArrayList<Requete> listeRequete = new ArrayList<Requete>();
   
-  public ListeRequete(int t){
-    taille = t;
-    listeRequete = new Requete[t];
-  }
   
   void receiveForme(String text, float conf){
     boolean ajouter = false;
     RequeteForme rf = new RequeteForme(text,conf);
-    for (int i=0; i<taille;i++){
-      if (!listeRequete[i].formeInRequete()) {
-        listeRequete[i].ajouterForme(rf);
+    for (int i=0; i<listeRequete.size();i++){
+      if (!listeRequete.get(i).formeInRequete()) {
+        listeRequete.get(i).ajouterForme(rf);
         ajouter = true;
         break;
       }
@@ -22,6 +17,7 @@ class ListeRequete {
     if (!ajouter) {
       Requete r = new Requete();
       r.ajouterForme(rf);
+      listeRequete.add(r);
     }
       
   }
@@ -29,9 +25,9 @@ class ListeRequete {
   void receiveVocal(String text, float conf){
     boolean ajouter = false;
     RequeteVocal rv = new RequeteVocal(text,conf);
-    for (int i=0; i<taille;i++){
-      if (!listeRequete[i].vocalInRequete()) {
-        listeRequete[i].ajouterVocal(rv);
+    for (int i=0; i<listeRequete.size();i++){
+      if (!listeRequete.get(i).vocalInRequete()) {
+        listeRequete.get(i).ajouterVocal(rv);
         ajouter = true;
         break;
       }
@@ -40,12 +36,39 @@ class ListeRequete {
     if (!ajouter) {
       Requete r = new Requete();
       r.ajouterVocal(rv);
+      listeRequete.add(r);
     }
       
   }
   
+  void addClick(int x, int y){
+    boolean ajouter = false;
+    RequeteClic rc = new RequeteClic(x,y);
+    for (int i=0; i<listeRequete.size();i++){
+      if (!listeRequete.get(i).clicInRequete()) {
+        listeRequete.get(i).ajouterClic(rc);
+        ajouter = true;
+        break;
+      }
+    }
+    
+    if (!ajouter) {
+      Requete r = new Requete();
+      r.ajouterClic(rc);
+      listeRequete.add(r);
+    }
+  }  
   
-  
-  
+  Requete checkRequetePrete(){
+     Requete r = null;
+    for(int i=0; i < listeRequete.size() ; i++){
+      if (listeRequete.get(i).estPrete()) {
+        r = listeRequete.get(i);
+       break; 
+      }
+    }
+    
+    return r;
+  }
   
 }

@@ -3,7 +3,7 @@ import fr.dgac.ivy.*;
 Ivy bus;
 FSM mae;
 
-ListeRequete listeRequete = new ListeRequete(10);
+ListeRequete listeRequete = new ListeRequete();
 
 void setup() {
   size(1200, 800);
@@ -21,7 +21,7 @@ void setup() {
       bus.bindMsg("^OneDollarIvy Template=(.*) Confidence=(.*)",new IvyMessageListener() {
         public void receive(IvyClient client, String[] args) {
                     System.out.println("Message reçu: " + args[0] + " pour " + args[1]);
-                    listeRequete.receiveVocal(args[0],float(args[1]));
+                    listeRequete.receiveForme(args[0],float(args[1]));
                 }});
     }
     catch (IvyException ie) {}
@@ -30,9 +30,9 @@ void setup() {
 }
 
 void draw() {
-    
+    listeRequete.checkRequetePrete();
 }
 
 void mouseClicked() {
-
+  listeRequete.addClick(mouseX,mouseY);
 }
