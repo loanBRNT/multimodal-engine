@@ -37,21 +37,28 @@ void setup() {
 
 //Fonction pour dessiner une requete complete
 void dessiner(Requete r) {
-  String forme = r.rf.getForme();
-   
-  fill(r.rv.getColor());
-  
-  switch(forme){
-   case "rectangle": rect(r.rc.x,r.rc.y,200,100); break;
-   
-   //case "losange": System.out.println("Losange");  break;
-   
-   case "cercle": circle(r.rc.x,r.rc.y,100);  break;
-   
-   //case "triangle": System.out.println("Triangle");  break;
-   
-   default: System.out.println("Autre");  break;
+  if (r.rv.action == "CREATE") {
+    String forme;
+    if (r.rv.shape != "none") {
+      forme = r.rv.shape;
+    }else{
+     forme = r.rf.getForme();
+    }
     
+    fill(r.rv.getColor());
+    
+    switch(forme){
+     case "rectangle": rect(r.rc.x,r.rc.y,200,100); break;
+     
+     //case "losange": System.out.println("Losange");  break;
+     
+     case "cercle": circle(r.rc.x,r.rc.y,100);  break;
+     
+     //case "triangle": System.out.println("Triangle");  break;
+     
+     default: System.out.println("Autre");  break;
+      
+    }
   }
 }
 

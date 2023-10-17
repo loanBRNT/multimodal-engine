@@ -2,9 +2,11 @@ class Requete {
   RequeteClic rc=null;
   RequeteForme rf=null;
   RequeteVocal rv=null;
+  RequeteClic rcAlt=null;
   
-  boolean formeInRequete(){
-    return (rf != null);
+  boolean formeInRequete(){ //on regarde si une forme a ete donnee dans la commande vocale
+    if (rv != null) return ((rf != null) || (rv.shape != "none") || (rv.action == "DEL"));
+    return (rf != null); 
   }
   
   boolean vocalInRequete(){
@@ -12,11 +14,21 @@ class Requete {
   }
   
   boolean clicInRequete(){
+    if (rv != null){
+     if (rv.action == "MOVE"){
+      return rc!=null || rcAlt!=null; 
+     }
+    }
     return rc!=null;
   }
   
+  //NE PAS APPELLER SANS AVOIR FAIT CLICINREQUETE AVANT
   void ajouterClic(RequeteClic r){
-     rc = r; 
+    if (rc != null) {
+      rcAlt=null;
+    } else {
+     rc = r;
+    }
   }
   
   void ajouterVocal(RequeteVocal r){
@@ -29,10 +41,15 @@ class Requete {
   
   //A modifier selon comment la requete doit etre valider (actuellement 1 voc, 1 forme, 1 clic)
   boolean estPrete() {
-   return rc != null && rf != null && rv != null;
+    if (rv != null) {
+      if (rv.action == "CREATE") return rc != null && ((rf != null) || rv.shape != "none");
+      if (rv.action == "DEL") return rc != null;
+      if (rv.action == "MOVE") return rc != null && rcAlt != null;
+    }
+   return false;
   }
   
   void debug(){
-     System.out.println("forme=" + rf.getForme() + " x=" + rc.x + " y=" + rc.y + " color=" + rv.colour); 
+     
   }
 }
