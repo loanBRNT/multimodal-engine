@@ -3,6 +3,8 @@ import fr.dgac.ivy.*;
 Ivy bus;
 FSM mae;
 
+ListeRequete listeRequete = new ListeRequete(10);
+
 void setup() {
   size(1200, 800);
   background(255);
@@ -14,6 +16,12 @@ void setup() {
       bus.bindMsg("^sra5 Text=(.*) Confidence=(.*)",new IvyMessageListener() {
         public void receive(IvyClient client, String[] args) {
                     System.out.println("Message reçu: " + args[0] + " pour " + args[1]);
+                    listeRequete.receiveVocal(args[0],float(args[1]));
+                }});
+      bus.bindMsg("^OneDollarIvy Template=(.*) Confidence=(.*)",new IvyMessageListener() {
+        public void receive(IvyClient client, String[] args) {
+                    System.out.println("Message reçu: " + args[0] + " pour " + args[1]);
+                    listeRequete.receiveVocal(args[0],float(args[1]));
                 }});
     }
     catch (IvyException ie) {}
