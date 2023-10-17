@@ -16,8 +16,13 @@ void setup() {
       bus.start("127.255.255.255:2010");
       bus.bindMsg("^sra5 Text=(.*) Confidence=(.*)",new IvyMessageListener() {
         public void receive(IvyClient client, String[] args) {
-                    String s = args[1].replace(",",".");
-                    listeRequete.receiveVocal(args[0],float(s));
+                    if (keyPressed){
+                      if (key == 'a' || key == 'A') {
+                        String s = args[1].replace(",",".");
+                        listeRequete.receiveVocal(args[0],float(s));
+                      }
+                    }
+                    
                 }});
       bus.bindMsg("^OneDollarIvy Template=(.*) Confidence=(.*)",new IvyMessageListener() {
         public void receive(IvyClient client, String[] args) {
