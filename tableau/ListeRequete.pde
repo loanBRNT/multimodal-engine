@@ -7,7 +7,7 @@ class ListeRequete {
     boolean ajouter = false;
     RequeteForme rf = new RequeteForme(text,conf);
     if (rf.isValid()){
-      System.out.println(rf.getForme() + "recu ");
+      System.out.println(rf.toString());
       for (int i=0; i<listeRequete.size();i++){
       if (!listeRequete.get(i).formeInRequete()) {
         listeRequete.get(i).ajouterForme(rf);
@@ -29,7 +29,7 @@ class ListeRequete {
     boolean ajouter = false;
     RequeteVocal rv = new RequeteVocal(text,conf);
     if (rv.isValid()){
-      System.out.println(rv.colour + "recu ");
+      System.out.println(rv.toString());
       for (int i=0; i<listeRequete.size();i++){
         if (!listeRequete.get(i).vocalInRequete()) {
           listeRequete.get(i).ajouterVocal(rv);
