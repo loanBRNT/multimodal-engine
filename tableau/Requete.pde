@@ -28,6 +28,10 @@ class Requete {
   }
   
   boolean estPrete() {
-   return rc != null && rf != null && rv != null; 
+   return rc != null && rf != null && rv != null;
+  }
+  
+  void debug(){
+     System.out.println("forme=" + rf.getForme() + " x=" + rc.x + " y=" + rc.y + " color=" + rv.colour); 
   }
 }

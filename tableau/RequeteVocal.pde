@@ -111,4 +111,9 @@ class RequeteVocal {
       }
     }
   }
+  
+  boolean isValid() {
+    
+   return colour != "none"; 
+  }
 }

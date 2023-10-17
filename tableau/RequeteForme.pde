@@ -18,4 +18,8 @@ public class RequeteForme {
     public String toString() {
         return "Forme: " + forme + ", Score: " + score;
     }
+    
+    boolean isValid() {
+     return (score > 0.6) && (forme != "NONE"); 
+    }
 }
