@@ -27,6 +27,7 @@ class Requete {
      rf = r; 
   }
   
+  //A modifier selon comment la requete doit etre valider (actuellement 1 voc, 1 forme, 1 clic)
   boolean estPrete() {
    return rc != null && rf != null && rv != null;
   }

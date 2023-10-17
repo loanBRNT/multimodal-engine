@@ -5,6 +5,7 @@ FSM mae;
 
 ListeRequete listeRequete = new ListeRequete();
 
+//Se fait au demarage
 void setup() {
   size(1200, 800);
   background(255);
@@ -29,28 +30,11 @@ void setup() {
       
 }
 
+//Fonction pour dessiner une requete complete
 void dessiner(Requete r) {
   String forme = r.rf.getForme();
    
-  switch(r.rv.colour){
-    
-   case "bleu": fill(0,0,255);  break;
-   
-   case "rouge": fill(255,0,0);  break;
-   
-   case "jaune": fill(255,255,0);  break;
-   
-   case "vert": fill(0,255,255);  break;
-   
-   case "violet": fill(255,0,255);  break;
-   
-   case "noir": fill(0,0,0);  break;
-   
-   case "orange": fill(255,128,0);  break;
-   
-   default: fill(255,255,255); System.out.println("def");  break;
-    
-  }
+  fill(r.rv.getColor());
   
   switch(forme){
    case "rectangle": rect(r.rc.x,r.rc.y,200,100); break;
@@ -66,6 +50,7 @@ void dessiner(Requete r) {
   }
 }
 
+//Fonction periodique
 void draw() {
     Requete r = listeRequete.checkRequetePrete();
     if (r != null) {

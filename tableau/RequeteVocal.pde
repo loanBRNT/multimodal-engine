@@ -116,4 +116,26 @@ class RequeteVocal {
     
    return colour != "none"; 
   }
+  
+  color getColor(){
+   switch(colour){
+    
+   case "bleu": return color(0,0,255);
+   
+   case "rouge": return color(255,0,0);
+   
+   case "jaune": return color(255,255,0); 
+   
+   case "vert": return color(0,255,255); 
+   
+   case "violet": return color(255,0,255); 
+   
+   case "noir": return color(0,0,0);
+   
+   case "orange": return color(255,128,0); 
+   
+   default: return color(255,255,255); 
+    
+  } 
+  }
 }

@@ -2,7 +2,7 @@ class ListeRequete {
   
   ArrayList<Requete> listeRequete = new ArrayList<Requete>();
   
-  
+  //ajotue une forme a la premiere requete Generale de la liste qui n'a pas deja une requete forme
   void receiveForme(String text, float conf){
     boolean ajouter = false;
     RequeteForme rf = new RequeteForme(text,conf);
@@ -24,6 +24,7 @@ class ListeRequete {
     }    
   }
   
+  //ajotue un voc a la premiere requete Generale de la liste qui n'a pas deja une requete vocal
   void receiveVocal(String text, float conf){
     boolean ajouter = false;
     RequeteVocal rv = new RequeteVocal(text,conf);
@@ -45,6 +46,7 @@ class ListeRequete {
     } 
   }
   
+  //ajoute un clic a la premiere requete Generale de la liste qui n'a pas deja une requete Clic
   void addClick(int x, int y){
     boolean ajouter = false;
     RequeteClic rc = new RequeteClic(x,y);
@@ -64,6 +66,7 @@ class ListeRequete {
     }
   }  
   
+  //Check si une requete de la liste est prete, sinon renvoie null, si oui la retire de la liste et la renvoie
   Requete checkRequetePrete(){
      Requete r = null;
     for(int i=0; i < listeRequete.size() ; i++){
