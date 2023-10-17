@@ -2,6 +2,7 @@
  * Simple class to store results
  *
  */
+ 
 class Result {
   String Name;
   float Score;
