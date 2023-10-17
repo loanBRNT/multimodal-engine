@@ -2,6 +2,7 @@
  * Rectangle to store the bounding box
  *
  */
+ 
 class Rectangle {
   float X;
   float Y;
