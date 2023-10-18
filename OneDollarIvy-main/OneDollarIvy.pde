@@ -4,7 +4,6 @@ import javax.swing.JOptionPane;
 // Attributes
 Ivy bus;
 
-color ORANGE = color(255,127,0);
 float Infinity = 1e9;
 
 // Recognizer class constants

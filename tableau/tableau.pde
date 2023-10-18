@@ -2,8 +2,9 @@ import fr.dgac.ivy.*;
 
 Ivy bus;
 FSM mae;
-
+int nbFormes = 0;
 ListeRequete listeRequete = new ListeRequete();
+ListeForme listeForme = new ListeForme();
 
 //Se fait au demarage
 void setup() {
@@ -31,43 +32,54 @@ void setup() {
                 }});
     }
     catch (IvyException ie) {}
-      mae = FSM.INITIAL;
-      
 }
 
-//Fonction pour dessiner une requete complete
-void dessiner(Requete r) {
+//Fonction pour analyser une requete complete
+void analyser(Requete r, ListeForme l) {
+  //Récupération des requetes
+   int x = r.rc.x;
+   int y = r.rc.y;
+   color couleur = r.rv.getColor();
+   
+  //fonctionnement de la MAE qui nous récupère selon l'interprétation les variables forme, x, y ,couleur
   if (r.rv.action == "CREATE") {
-    String forme;
+    String shape;
     if (r.rv.shape != "none") {
-      forme = r.rv.shape;
+      shape = r.rv.shape;
     }else{
-     forme = r.rf.getForme();
+      shape = r.rf.getForme();
     }
-    
-    fill(r.rv.getColor());
-    
-    switch(forme){
-     case "rectangle": rect(r.rc.x,r.rc.y,200,100); break;
-     
-     //case "losange": System.out.println("Losange");  break;
-     
-     case "cercle": circle(r.rc.x,r.rc.y,100);  break;
-     
-     //case "triangle": System.out.println("Triangle");  break;
-     
-     default: System.out.println("Autre");  break;
-      
-    }
+  //Créer la forme reçu
+   Forme forme = new Forme(shape, x, y, couleur);
+  //Stocke dans le tableau
+   l.ajouterForme(forme);
+   if(l.estNonVide()){
+     System.out.println(l.toString());
+   }
+  }
+}
+
+//Fonction de dessins des formes stockées.
+void dessiner(ListeForme list) {
+  if (list.estNonVide()){
+    list.draw();
   }
 }
 
 //Fonction periodique
 void draw() {
+    nbFormes = listeForme.formes.size();
     Requete r = listeRequete.checkRequetePrete();
     if (r != null) {
         r.debug();
-        dessiner(r);
+        System.out.println("Requete non nulle");
+        analyser(r,listeForme);
+    }
+    
+    if (listeForme.formes.size() != nbFormes) {
+        nbFormes = listeForme.formes.size();
+        background(255);
+        dessiner(listeForme);
     }
 }
 
