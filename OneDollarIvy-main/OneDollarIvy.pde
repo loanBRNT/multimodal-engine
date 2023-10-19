@@ -25,7 +25,7 @@ PImage sketch_icon;
 
 void setup() {
   size(400, 250);
-  surface.setTitle("Vous pouvez déssinez ici pour ajouter une forme au tableau blanc");
+  surface.setTitle("DESSINER UNE FORME");
   surface.setLocation(850,50);
   sketch_icon = loadImage("onedollar.jpg");
   surface.setIcon(sketch_icon);

@@ -35,7 +35,7 @@ void setup() {
 }
 
 //Fonction pour analyser une requete complete
-void analyser(Requete r, ListeForme l) {
+void analyser(Requete r) {
   //Récupération des requetes
    int x = r.rc.x;
    int y = r.rc.y;
@@ -52,10 +52,8 @@ void analyser(Requete r, ListeForme l) {
   //Créer la forme reçu
    Forme forme = new Forme(shape, x, y, couleur);
   //Stocke dans le tableau
-   l.ajouterForme(forme);
-   if(l.estNonVide()){
-     System.out.println(l.toString());
-   }
+   listeForme.ajouterForme(forme);
+   
   }
 }
 
@@ -68,16 +66,9 @@ void dessiner(ListeForme list) {
 
 //Fonction periodique
 void draw() {
-    nbFormes = listeForme.formes.size();
     Requete r = listeRequete.checkRequetePrete();
     if (r != null) {
-        r.debug();
-        System.out.println("Requete non nulle");
-        analyser(r,listeForme);
-    }
-    
-    if (listeForme.formes.size() != nbFormes) {
-        nbFormes = listeForme.formes.size();
+        analyser(r);
         background(255);
         dessiner(listeForme);
     }
@@ -85,4 +76,8 @@ void draw() {
 
 void mouseClicked() {
   listeRequete.addClick(mouseX,mouseY);
+}
+
+void keyPressed() {
+  if (key=='l' || key=='L') System.out.println("Liste requete :\n" + listeRequete.toString());
 }

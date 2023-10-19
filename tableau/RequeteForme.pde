@@ -16,7 +16,7 @@ public class RequeteForme {
     }
 
     public String toString() {
-        return "Forme: " + forme + ", Score: " + score;
+        return "Forme: " + forme;
     }
     
     boolean isValid() {

@@ -24,7 +24,7 @@ public class ListeForme {
                     circle(forme.getX(),forme.getY(),100);
                     break;
                 case "losange":
-                    float halfDiagonal = 200; // Longueur de la moitié de la diagonale du losange (ajustez selon vos besoins)
+                    float halfDiagonal = 50; // Longueur de la moitié de la diagonale du losange (ajustez selon vos besoins)
                     beginShape();
                     vertex(forme.getX(), forme.getY() - halfDiagonal); // Sommet supérieur
                     vertex(forme.getX() + halfDiagonal, forme.getY()); // Coin droit
