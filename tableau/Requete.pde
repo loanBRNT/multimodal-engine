@@ -49,7 +49,11 @@ class Requete {
    return false;
   }
   
-  void debug(){
-     
+  String toString(){
+     String s = "{";
+     if (rv != null) s = s + " rv=" + rv.toString();
+     if (rf != null) s = s + " rf=" + rf.toString();
+     if (rc != null) s = s + " rc=" + rc.toString();
+     return s + " }";
   }
 }

@@ -1,17 +1,18 @@
 import java.util.ArrayList;
 import java.util.List;
 
+String[] create = {"créer","dessiner","tracer"};
+String[] couleur = {"bleu","rouge","vert","orange","jaune","violet","noir"};
+String[] forme = {"triangle","rectangle","losange","cercle"};
+//String[] objet = {"ça","cette forme"};
+String[] suppr = {"supprimer","effacer"};
+String[] position = {"ici","là","à cet endroit"};
+String[] bouger = {"bouger","deplacer"};
+String[] quitter = {"quitter","sortir","arrêter"};
+
 class RequeteVocal {
   String text;
   float confidence;
-  List<String> create = new ArrayList<>();
-  List<String> couleur = new ArrayList<>();
-  List<String> forme = new ArrayList<>();
-  List<String> objet = new ArrayList<>();
-  List<String> suppr = new ArrayList<>();
-  List<String> position = new ArrayList<>();
-  List<String> bouger = new ArrayList<>();
-  List<String> quitter = new ArrayList<>();
   String action = "none";
   String colour = "none";
   String pos = "none";
@@ -21,47 +22,9 @@ class RequeteVocal {
     this.text = text;
     this.confidence = conf;
     
-    this.fillList();
-    
     this.affectation();
   }
-  
-  void fillList(){
-    create.add("créer");
-    create.add("dessiner");
-    create.add("tracer");
-    
-    couleur.add("bleu");
-    couleur.add("rouge");
-    couleur.add("vert");
-    couleur.add("orange");
-    couleur.add("jaune");
-    couleur.add("violet");
-    couleur.add("noir");
-    
-    forme.add("triangle");
-    forme.add("rectangle");
-    forme.add("losange");
-    forme.add("cercle");
-    
-    objet.add("ça");
-    objet.add("cette forme");
-    
-    suppr.add("supprimer");
-    suppr.add("effacer");
-    
-    position.add("ici");
-    position.add("là");
-    position.add("à cet endroit");
 
-    bouger.add("bouger");
-    bouger.add("déplacer");
-    
-    quitter.add("quitter");
-    quitter.add("sortir");
-    quitter.add("arrêter");
-
-  }
   
   void affectation(){
     for ( String i : create){
@@ -87,11 +50,11 @@ class RequeteVocal {
       }
     }
     
-    for ( String i : objet){
-      if(this.text.contains(i)){
-        this.shape = "THIS";
-      }
-    }
+    //for ( String i : objet){
+    //  if(this.text.contains(i)){
+      //  this.shape = "THIS";
+      //}
+    //}
     
     for ( String i : bouger){
       if(this.text.contains(i)){
@@ -113,8 +76,7 @@ class RequeteVocal {
   }
   
   boolean isValid() {
-    
-   return colour != "none"; 
+   return action != "none";
   }
   
   color getColor(){
@@ -126,7 +88,7 @@ class RequeteVocal {
    
    case "jaune": return color(255,255,0); 
    
-   case "vert": return color(0,255,255); 
+   case "vert": return color(0,255,0); 
    
    case "violet": return color(255,0,255); 
    
@@ -134,7 +96,7 @@ class RequeteVocal {
    
    case "orange": return color(255,128,0); 
    
-   default: return color(255,255,255); 
+   default: return color(0,0,0l); 
     
   } 
   }

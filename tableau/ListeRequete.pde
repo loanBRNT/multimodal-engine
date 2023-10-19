@@ -79,5 +79,13 @@ class ListeRequete {
     
     return r;
   }
+
+  String toString(){
+   String s = "";
+    for (Requete r : listeRequete){
+     s = s + "-" + r.toString() + "\n";
+    }
+    return s;
+  }
   
 }

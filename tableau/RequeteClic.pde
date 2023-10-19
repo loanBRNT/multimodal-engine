@@ -7,4 +7,7 @@ class RequeteClic {
     y=_y;
   }
   
+  String toString(){
+   return "( x=" + x + ", y=" + y + " )";
+  }
 }
