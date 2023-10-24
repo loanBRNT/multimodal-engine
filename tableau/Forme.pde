@@ -36,4 +36,18 @@ public class Forme {
     public String toString() {
         return "Forme: " + forme + ", Coordonnées (x, y): (" + x + ", " + y + "), Couleur: " + couleur;
     }
+    
+    boolean surForme(int _x, int _y) {
+      switch (forme){
+       case "rectangle" : return (_x > x - 100) && (_x < x + 100) && (_y > y - 50) && (_y < y + 50);
+       
+       case "cercle" : return (_x > x - 50) && (_x < x + 50) && (_y > y - 50) && (_y < y + 50);
+       
+       case "losange" : return (_x > x - 75) && (_x < x + 75) && (_y > y - 75) && (_y < y + 75);
+       
+       case "triangle" : return (_x > x - 50) && (_x < x + 50) && (_y > y - 50) && (_y < y + 50);
+          
+        default: return false;
+      }     
+    }
 }

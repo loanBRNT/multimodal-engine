@@ -24,7 +24,7 @@ public class ListeForme {
                     circle(forme.getX(),forme.getY(),100);
                     break;
                 case "losange":
-                    float halfDiagonal = 50; // Longueur de la moitié de la diagonale du losange (ajustez selon vos besoins)
+                    float halfDiagonal = 75; // Longueur de la moitié de la diagonale du losange (ajustez selon vos besoins)
                     beginShape();
                     vertex(forme.getX(), forme.getY() - halfDiagonal); // Sommet supérieur
                     vertex(forme.getX() + halfDiagonal, forme.getY()); // Coin droit
@@ -33,11 +33,11 @@ public class ListeForme {
                     endShape(PApplet.CLOSE);
                     break;
                 case "triangle":
-                    float height = 50 * sqrt(3) / 2; // Hauteur d'un triangle équilatéral
+                    float height = 100 * sqrt(3) / 2; // Hauteur d'un triangle équilatéral
                     beginShape();
                     vertex(forme.getX(), forme.getY() - height / 2); // Sommet supérieur
-                    vertex(forme.getX() + 25, forme.getY() + height / 2); // Coin droit
-                    vertex(forme.getX() - 25, forme.getY() + height / 2); // Coin gauche
+                    vertex(forme.getX() + 50, forme.getY() + height / 2); // Coin droit
+                    vertex(forme.getX() - 50, forme.getY() + height / 2); // Coin gauche
                     endShape(PApplet.CLOSE);
                     break;
                 case "rectangle":
@@ -64,5 +64,15 @@ public class ListeForme {
             result.append(forme.toString()).append("\n");
         }
         return result.toString();
+    }
+    
+    Forme getForme(int x, int y) {
+      Forme formeOverlap = null;
+      for (Forme f : formes){
+       if (f.surForme(x,y)){
+         formeOverlap = f;
+       }
+      }
+      return formeOverlap;
     }
 }
