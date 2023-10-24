@@ -1,11 +1,11 @@
 public class Forme {
     private String forme;
-    private float x;
-    private float y;
+    private int x;
+    private int y;
     private color couleur;
 
     // Constructeur prenant la forme (sous forme de chaîne), les coordonnées x et y (float) et la couleur (sous forme de chaîne) en paramètres
-    public Forme(String forme, float x, float y, color couleur) {
+    public Forme(String forme, int x, int y, color couleur) {
         this.forme = forme;
         this.x = x;
         this.y = y;
@@ -18,18 +18,24 @@ public class Forme {
     }
 
     // Getter pour obtenir la coordonnée x
-    public float getX() {
+    public int getX() {
         return x;
     }
 
     // Getter pour obtenir la coordonnée y
-    public float getY() {
+    public int getY() {
         return y;
     }
 
     // Getter pour obtenir la couleur
     public color getCouleur() {
         return couleur;
+    }
+    
+    // Méthode pour changer les coordonnées de la forme
+    public void deplacer(int newX, int newY) {
+        this.x = newX;
+        this.y = newY;
     }
 
     // Méthode pour afficher la forme sous forme de chaîne (utile pour le débogage)
