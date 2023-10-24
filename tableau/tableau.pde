@@ -53,8 +53,12 @@ void analyser(Requete r) {
    Forme forme = new Forme(shape, x, y, couleur);
   //Stocke dans le tableau
    listeForme.ajouterForme(forme);
-   
   }
+  
+ if (r.rv.action == "DEL") {
+  //Supprimer dans le tableau
+   listeForme.supprimerForme(x,y);
+ }
 }
 
 //Fonction de dessins des formes stockées.

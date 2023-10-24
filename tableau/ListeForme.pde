@@ -75,4 +75,15 @@ public class ListeForme {
       }
       return formeOverlap;
     }
+    
+    // Méthode pour supprimer la forme
+    public void supprimerForme(int x, int y) {
+      formes.remove(getForme(x,y));
+    }
+    
+    // Méthode pour deplacer la forme
+    public void deplacerForme(Forme forme, int new_x, int new_y) {
+      forme.deplacer(new_x, new_y);
+    }
+    
 }
