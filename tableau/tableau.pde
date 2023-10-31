@@ -37,27 +37,26 @@ void setup() {
 //Fonction pour analyser une requete complete
 void analyser(Requete r) {
   //Récupération des requetes
-   int x = r.rc.x;
-   int y = r.rc.y;
-   color couleur = r.rv.getColor();
+   Forme forme;
+   System.out.println(r.toString());
+ 
+ switch (r.state){
    
-  //fonctionnement de la MAE qui nous récupère selon l'interprétation les variables forme, x, y ,couleur
-  if (r.rv.action == "CREATE") {
-    String shape;
-    if (r.rv.shape != "none") {
-      shape = r.rv.shape;
-    }else{
-      shape = r.rf.getForme();
-    }
-  //Créer la forme reçu
-   Forme forme = new Forme(shape, x, y, couleur);
-  //Stocke dans le tableau
-   listeForme.ajouterForme(forme);
-  }
-  
- if (r.rv.action == "DEL") {
-  //Supprimer dans le tableau
-   listeForme.supprimerForme(x,y);
+   case SEPT: listeForme.supprimerForme(r.clickSurForme); break;
+   
+   case HUIT:
+     forme = new Forme(r.rv.shape, r.rc.x, r.rc.y, r.rv.getColor());
+     listeForme.ajouterForme(forme);
+     break;
+   
+   case ONZE:
+     forme = new Forme(r.rf.getForme(), r.rc.x, r.rc.y, r.rv.getColor());
+     listeForme.ajouterForme(forme);
+     break;
+   
+   case QUATORZE: listeForme.deplacerForme(r.clickSurForme,r.rc.x,r.rc.y); break;
+     
+   default: throw new IllegalArgumentException("Requete non valide: " + r.toString());
  }
 }
 
@@ -79,7 +78,12 @@ void draw() {
 }
 
 void mouseClicked() {
-  listeRequete.addClick(mouseX,mouseY);
+  int x = mouseX;
+  int y = mouseY;
+  
+  Forme f = listeForme.getForme(x,y);
+  
+  listeRequete.addClick(x,y,f);
 }
 
 void keyPressed() {

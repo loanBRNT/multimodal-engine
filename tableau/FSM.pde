@@ -4,11 +4,22 @@
  */
  
 public enum FSM {
-  INITIAL, /* Etat Initial */ 
-  RECOGNITION, /* mode de reconnaissance */ 
-  LEARNING, /* mode apprentissage */
-  EXPORT, /* export des templates */
-  IMPORT, /* import des templates */ 
-  TEMPLATES, /* affichage des templates */ 
-  HELP
+  ZERO,
+  UN,
+  DEUX,
+  TROIS,
+  QUATRE,
+  CINQ,
+  SIX,
+  SEPT,
+  HUIT,
+  NEUF,
+  DIX,
+  ONZE,
+  DOUZE,
+  TREIZE,
+  QUATORZE,
+  QUINZE,
+  SEIZE,
+  DIX_SEPT
 }

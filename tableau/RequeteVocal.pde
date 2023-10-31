@@ -24,7 +24,6 @@ class RequeteVocal {
     
     this.affectation();
   }
-
   
   void affectation(){
     for ( String i : create){
@@ -99,6 +98,10 @@ class RequeteVocal {
    default: return color(0,0,0l); 
     
   } 
+  }
+  
+  boolean formeInVocal(){
+    return this.shape != "none";
   }
   
   String toString(){

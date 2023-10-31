@@ -2,58 +2,150 @@ class Requete {
   RequeteClic rc=null;
   RequeteForme rf=null;
   RequeteVocal rv=null;
-  RequeteClic rcAlt=null;
+  Forme clickSurForme=null;
   
-  boolean formeInRequete(){ //on regarde si une forme a ete donnee dans la commande vocale
-    if (rv != null) return ((rf != null) || (rv.shape != "none") || (rv.action == "DEL"));
-    return (rf != null); 
-  }
+  FSM state = FSM.ZERO;
   
-  boolean vocalInRequete(){
-    return rv!=null;
-  }
-  
-  boolean clicInRequete(){
-    if (rv != null){
-     if (rv.action == "MOVE"){
-      return rc!=null || rcAlt!=null; 
-     }
+  boolean ajouterClic(RequeteClic r){
+    switch (state){
+      
+     case ZERO: state = FSM.UN; break;
+     
+     case DEUX: state = FSM.QUINZE; break;
+     
+     case QUATRE: state = FSM.TREIZE; break;
+     
+     case CINQ: state = FSM.HUIT; break;
+      
+     case SIX: state = FSM.DIX; break;
+     
+     case NEUF: state = FSM.ONZE; break;
+     
+     case DOUZE: state = FSM.QUATORZE; break;
+     
+     case SEIZE: state = FSM.DIX_SEPT; break;
+     
+     default: return false;
+      
     }
-    return rc!=null;
+    rc = r;
+    return true;
   }
   
-  //NE PAS APPELLER SANS AVOIR FAIT CLICINREQUETE AVANT
-  void ajouterClic(RequeteClic r){
-    if (rc != null) {
-      rcAlt=null;
-    } else {
-     rc = r;
+  boolean ajouterClicSurForme(Forme f){
+    switch (state){
+      
+     case ZERO: state = FSM.DEUX; break;
+     
+     case UN: state = FSM.QUINZE; break;
+     
+     case TROIS: state = FSM.SEPT; break;
+     
+     case QUATRE: state = FSM.DOUZE; break;
+     
+     case TREIZE: state = FSM.QUATORZE; break;
+     
+     default: return false;
+      
     }
+     clickSurForme = f;
+     return true;
   }
   
-  void ajouterVocal(RequeteVocal r){
-     rv = r; 
+  boolean ajouterVocalCREATE_Forme(RequeteVocal r){
+    switch (state){
+      
+     case ZERO: state = FSM.CINQ; break;
+     
+     case UN: state = FSM.HUIT; break;
+     
+     default: return false;
+      
+    }
+     rv = r;
+     return true;
   }
   
-  void ajouterForme(RequeteForme r){
-     rf = r; 
+  boolean ajouterVocalCREATE_SansForme(RequeteVocal r){
+    switch (state){
+      
+     case ZERO: state = FSM.SIX; break;
+     
+     case UN: state = FSM.DIX; break;
+     
+     case SEIZE: state = FSM.NEUF; break;
+     
+     case DIX_SEPT: state = FSM.ONZE; break;
+     
+     default: return false;
+      
+    }
+     rv = r;
+     return true;
   }
   
-  //A modifier selon comment la requete doit etre valider (actuellement 1 voc, 1 forme, 1 clic)
+  boolean ajouterVocalMOVE(RequeteVocal r){
+    switch (state){
+      
+     case ZERO: state = FSM.QUATRE; break;
+     
+     case DEUX: state = FSM.DOUZE; break;
+     
+     case UN: state = FSM.TREIZE; break;
+     
+     case QUINZE: state = FSM.QUATORZE; break;
+     
+     default: return false;
+      
+    }
+     rv = r;
+     return true;
+  }
+  
+  boolean ajouterVocalDEL(RequeteVocal r){
+    switch (state){
+      
+     case ZERO: state = FSM.TROIS; break;
+     
+     case DEUX: state = FSM.SEPT; break;
+     
+     default: return false;
+      
+    }
+     rv = r;
+     return true;
+  }
+  
+  boolean ajouterForme(RequeteForme r){
+    switch (state){
+      
+      case ZERO: state = FSM.SEIZE; break;
+      
+      case SIX: state = FSM.NEUF; break;
+      
+      case DIX: state = FSM.ONZE; break;
+      
+      case UN: state = FSM.DIX_SEPT; break;
+      
+     default: return false; 
+    }
+     rf = r;
+     return true;
+  }
+  
   boolean estPrete() {
-    if (rv != null) {
-      if (rv.action == "CREATE") return rc != null && ((rf != null) || rv.shape != "none");
-      if (rv.action == "DEL") return rc != null;
-      if (rv.action == "MOVE") return rc != null && rcAlt != null;
+    if (state == FSM.SEPT || state == FSM.HUIT || state == FSM.ONZE || state == FSM.QUATORZE) {
+      return true;
     }
    return false;
   }
   
   String toString(){
-     String s = "{";
+     String s = "{ state=" + state;
      if (rv != null) s = s + " rv=" + rv.toString();
      if (rf != null) s = s + " rf=" + rf.toString();
      if (rc != null) s = s + " rc=" + rc.toString();
+     if (clickSurForme != null) s = s + " Forme=" + clickSurForme.toString();
      return s + " }";
   }
 }

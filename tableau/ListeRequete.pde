@@ -1,3 +1,5 @@
+import java.util.function.BiFunction;
+
 class ListeRequete {
   
   ArrayList<Requete> listeRequete = new ArrayList<Requete>();
@@ -9,8 +11,7 @@ class ListeRequete {
     if (rf.isValid()){
       System.out.println(rf.toString());
       for (int i=0; i<listeRequete.size();i++){
-      if (!listeRequete.get(i).formeInRequete()) {
-        listeRequete.get(i).ajouterForme(rf);
+      if (listeRequete.get(i).ajouterForme(rf)) {
         ajouter = true;
         break;
       }
@@ -28,40 +29,60 @@ class ListeRequete {
   void receiveVocal(String text, float conf){
     boolean ajouter = false;
     RequeteVocal rv = new RequeteVocal(text,conf);
-    if (rv.isValid()){
-      System.out.println(rv.toString());
-      for (int i=0; i<listeRequete.size();i++){
-        if (!listeRequete.get(i).vocalInRequete()) {
-          listeRequete.get(i).ajouterVocal(rv);
-          ajouter = true;
-          break;
+    BiFunction<Requete, RequeteVocal, Boolean> func;
+    switch (rv.action){
+            case "CREATE":
+                func = rv.formeInVocal() ? Requete::ajouterVocalCREATE_Forme : Requete::ajouterVocalCREATE_SansForme;
+                break;
+            case "MOVE":
+                func = Requete::ajouterVocalMOVE;
+                break;
+            case "DEL":
+                func = Requete::ajouterVocalDEL;
+                break;
+            default:
+                throw new IllegalArgumentException("Action non valide: " + rv.action);
         }
-      }
+    System.out.println(rv.toString());
+    for (int i=0; i<listeRequete.size();i++){
+        if (func.apply(listeRequete.get(i), rv)) {
+                ajouter = true;
+                break;
+            }
+     }
       
-      if (!ajouter) {
+     if (!ajouter) {
         Requete r = new Requete();
-        r.ajouterVocal(rv);
+        func.apply(r, rv);
         listeRequete.add(r);
-      }
-    } 
+     }
   }
   
   //ajoute un clic a la premiere requete Generale de la liste qui n'a pas deja une requete Clic
-  void addClick(int x, int y){
+  void addClick(int x, int y, Forme f){
     boolean ajouter = false;
     RequeteClic rc = new RequeteClic(x,y);
-    System.out.println("Clic recu " + rc.x + " " + rc.y);
+    String s = "Clic recu " + rc.x + " " + rc.y;
+    if (f!=null) {s = s + "sur une forme";}
+    System.out.println(s);
     for (int i=0; i<listeRequete.size();i++){
-      if (!listeRequete.get(i).clicInRequete()) {
-        listeRequete.get(i).ajouterClic(rc);
-        ajouter = true;
-        break;
+      if (f!=null) {
+        if (listeRequete.get(i).ajouterClicSurForme(f)){ 
+          ajouter = true;
+          break;
+        }
+      } else {
+        if (listeRequete.get(i).ajouterClic(rc)){ 
+          ajouter = true;
+          break;
+        }
       }
     }
     
     if (!ajouter) {
       Requete r = new Requete();
-      r.ajouterClic(rc);
+      if (f==null) {r.ajouterClic(rc);}
+      else {r.ajouterClicSurForme(f);}
       listeRequete.add(r);
     }
   }  

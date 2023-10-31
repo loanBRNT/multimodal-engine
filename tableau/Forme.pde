@@ -40,7 +40,7 @@ public class Forme {
 
     // Méthode pour afficher la forme sous forme de chaîne (utile pour le débogage)
     public String toString() {
-        return "Forme: " + forme + ", Coordonnées (x, y): (" + x + ", " + y + "), Couleur: " + couleur;
+        return "{Forme: " + forme + ", Coordonnées (x, y): (" + x + ", " + y + "), Couleur: " + couleur + " }";
     }
     
     boolean surForme(int _x, int _y) {

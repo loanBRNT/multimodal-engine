@@ -77,8 +77,9 @@ public class ListeForme {
     }
     
     // Méthode pour supprimer la forme
-    public void supprimerForme(int x, int y) {
-      formes.remove(getForme(x,y));
+    public void supprimerForme(Forme f) {
+      System.out.println(f);
+      formes.remove(f);
     }
     
     // Méthode pour deplacer la forme
