@@ -105,6 +105,6 @@ class RequeteVocal {
   }
   
   String toString(){
-    return "Action=" + action + " couleur=" + colour + " pos=" + pos + " shape=" + shape;
+    return "Action: " + action + " - Couleur: " + colour + " - Forme: " + shape;
   }
 }

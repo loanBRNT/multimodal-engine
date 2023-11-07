@@ -146,11 +146,11 @@ class Requete {
   }
   
   String toString(){
-     String s = "{ state=" + state;
-     if (rv != null) s = s + " rv=" + rv.toString();
-     if (rf != null) s = s + " rf=" + rf.toString();
-     if (rc != null) s = s + " rc=" + rc.toString();
-     if (clickSurForme != null) s = s + " Forme=" + clickSurForme.toString();
-     return s + " }";
+     String s = "";
+     if (rv != null) s = s + " Vocal: " + rv.toString();
+     if (rf != null) s = s + " Dessin: " + rf.toString();
+     if (rc != null) s = s + " Clic: " + rc.toString();
+     if (clickSurForme != null) s = s + " Forme: " + clickSurForme.toString();
+     return s ;
   }
 }

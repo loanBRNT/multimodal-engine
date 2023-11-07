@@ -8,6 +8,6 @@ class RequeteClic {
   }
   
   String toString(){
-   return "( x=" + x + ", y=" + y + " )";
+   return "( X: " + x + ", Y: " + y + " )";
   }
 }

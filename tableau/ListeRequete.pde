@@ -4,6 +4,14 @@ class ListeRequete {
   
   ArrayList<Requete> listeRequete = new ArrayList<Requete>();
   
+  void addRequete(Requete r, int taille){
+    if (listeRequete.size() >= taille){
+      listeRequete.remove(0);
+      listeRequete.add(r);
+    }else{
+      listeRequete.add(r);
+    }
+  }
   //ajotue une forme a la premiere requete Generale de la liste qui n'a pas deja une requete forme
   void receiveForme(String text, float conf){
     boolean ajouter = false;
@@ -20,7 +28,7 @@ class ListeRequete {
     if (!ajouter) {
       Requete r = new Requete();
       r.ajouterForme(rf);
-      listeRequete.add(r);
+      this.addRequete(r,5);
     }
     }    
   }
@@ -61,13 +69,14 @@ class ListeRequete {
      if (!ajouter) {
         Requete r = new Requete();
         func.apply(r, rv);
-        listeRequete.add(r);
+        this.addRequete(r,5);
      }
   }
   
   //ajoute un clic a la premiere requete Generale de la liste qui n'a pas deja une requete Clic
   void addClick(int x, int y, Forme f){
     boolean ajouter = false;
+    int tailleMaxClick = 5;
     RequeteClic rc = new RequeteClic(x,y);
     String s = "Clic recu " + rc.x + " " + rc.y;
     if (f!=null) {s = s + "sur une forme";}
@@ -90,7 +99,7 @@ class ListeRequete {
       Requete r = new Requete();
       if (f==null) {r.ajouterClic(rc);}
       else {r.ajouterClicSurForme(f);}
-      listeRequete.add(r);
+      this.addRequete(r,tailleMaxClick);
     }
   }  
   

@@ -12,6 +12,11 @@ void setup() {
   background(255);
   smooth();
   surface.setTitle("Ecran");
+  fill(0);
+  textSize(18);
+    text("Maintenez la touche 'a' pour parler",25,725);
+    text("Maintenez la touche 'e' pour afficher des exemples d'utilisation",25,775);
+    text("Maintenez la touche 'l' pour afficher les requêtes en attente",25,750);
   try {
       bus = new Ivy("Tableau", "Tableau est pret", null);
       bus.start("127.255.255.255:2010");
@@ -72,8 +77,25 @@ void draw() {
     Requete r = listeRequete.checkRequetePrete();
     if (r != null) {
         analyser(r);
-        background(255);
-        dessiner(listeForme);
+    }
+    background(255);
+    dessiner(listeForme);
+    fill(0);
+    text("Maintenez la touche 'a' pour parler",25,725);
+    text("Maintenez la touche 'e' pour afficher des exemples d'utilisation",25,775);
+    text("Maintenez la touche 'l' pour afficher les requêtes en attente",25,750);
+    if (keyPressed){
+      if (key=='l' || key=='L'){
+        text("Liste requêtes :\n" + listeRequete.toString(),25,25);
+      }
+      if (key=='e' || key=='E'){
+        text("Exemples d'utilisation: ",25,25);
+        text("- \"Créer un triangle rouge\" + Clic tableau",25,50);
+        text("- \"Bouger ça ici\" + Clic sur une forme + Clic",25,75);
+        text("- \"Supprimer ça\" + Clic sur une forme",25,100);
+        text("- \"Créer ça\" + Dessin + Clic tableau ",25,125);
+      }
+      
     }
 }
 
@@ -84,8 +106,4 @@ void mouseClicked() {
   Forme f = listeForme.getForme(x,y);
   
   listeRequete.addClick(x,y,f);
-}
-
-void keyPressed() {
-  if (key=='l' || key=='L') System.out.println("Liste requete :\n" + listeRequete.toString());
 }
