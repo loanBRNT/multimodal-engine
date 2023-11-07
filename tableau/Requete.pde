@@ -133,6 +133,11 @@ class Requete {
      return true;
   }
   
+  boolean vocalInRequete(){
+    if (rv != null) return true;
+    return false;
+  }
+  
   boolean estPrete() {
     if (state == FSM.SEPT || state == FSM.HUIT || state == FSM.ONZE || state == FSM.QUATORZE) {
       return true;

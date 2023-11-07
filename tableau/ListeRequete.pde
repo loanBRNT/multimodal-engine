@@ -41,7 +41,8 @@ class ListeRequete {
                 func = Requete::ajouterVocalDEL;
                 break;
             default:
-                throw new IllegalArgumentException("Action non valide: " + rv.action);
+                System.out.println("Action non valide: " + rv.action);
+                return;
         }
     System.out.println(rv.toString());
     for (int i=0; i<listeRequete.size();i++){
@@ -49,6 +50,12 @@ class ListeRequete {
                 ajouter = true;
                 break;
             }
+        else {
+           if (listeRequete.get(i).vocalInRequete()) {
+            listeRequete.remove(i);
+            i--;
+           }
+        }
      }
       
      if (!ajouter) {
